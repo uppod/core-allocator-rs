@@ -163,6 +163,7 @@ impl HierarchicalAllocator {
                         groups.add_group(group)
                     }
                 }
+
             }
         } else {
             for object in topo.objects_with_type(&obj_type).unwrap().iter() {
@@ -183,6 +184,7 @@ impl HierarchicalAllocator {
                 }
             }
         }
+        groups.groups.remove(groups.groups.len() - 1);
         groups
     }
 }

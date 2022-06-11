@@ -185,6 +185,7 @@ impl HierarchicalAllocator {
             }
         }
         groups.groups.remove(groups.groups.len() - 1);
+        groups.groups.remove(groups.groups.len() - 1);
         groups
     }
 }

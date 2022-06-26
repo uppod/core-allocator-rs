@@ -121,7 +121,7 @@ impl HierarchicalAllocator {
         self
     }
 
-    pub fn finish(self) -> GroupedAllocator {
+    pub fn finish(self, excluded: Vec<u32>) -> GroupedAllocator {
         let obj_type = self.object_type;
         let topo = hwloc2::Topology::new().unwrap();
         let mut groups = GroupedAllocator::new();
@@ -134,6 +134,9 @@ impl HierarchicalAllocator {
                 .enumerate()
             {
                 if allow_cpu.iter().find(|x| **x == i).is_some() {
+                    if excluded.contains(bit) {
+                        continue
+                    }
                     for bit in cpu.cpuset().unwrap() {
                         allow.set(bit);
                     }
